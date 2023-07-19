@@ -1,22 +1,9 @@
 
-const express = require("express")
-const managerRouter = express.Router()
-const {Managers} = require("../model/managerModel")
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
-
-require("dotenv").config()
 
 
- 
-managerRouter.get("/", async (req, res)=>{
-    try {
-        let allManager = await Managers.find()
-        res.send({message : "Hello, Manager!", allManager})        
-    } catch (error) {
-        console.log("something went wrong in manager router in /")
-    }
-})
+
+
+
 
 managerRouter.post("/register", async (req, res)=>{
     try {
@@ -54,7 +41,7 @@ managerRouter.post("/login", async (req, res)=>{
         bcrypt.compare(password, dataAvailable.password, function(err, result) {
             // result == true
             if(result){
-                var token = jwt.sign({managerId : email}, process.env.secret, {expiresIn : "1h"});
+                var token = jwt.sign({managerId : dataAvailable._id}, process.env.secret);
                 res.send({message : "Login Successfull", name : dataAvailable.name, token})
             }
         });
@@ -62,26 +49,3 @@ managerRouter.post("/login", async (req, res)=>{
         console.log("something went wrong in manager router in /")
     }
 })
-
-
-
-// managerRouter.get("/projects", async (req, res)=>{
-//     try {
-         
-//     } catch (error) {
-//         console.log("something went wrong in manager router in /")
-//     }
-// })
-
-
-// managerRouter.get("/project/employee", async (req, res)=>{
-//     try {
-         
-//     } catch (error) {
-//         console.log("something went wrong in manager router in /")
-//     }
-// })
-
-
-
-module.exports = {managerRouter}
