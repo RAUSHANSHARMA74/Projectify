@@ -2,10 +2,14 @@
 const mongoose = require("mongoose")
 
 const taskSchema = mongoose.Schema({
-    studentName : String,
-    studentId : String,
-    projectName : String,
-    status : Boolean
+    taskName : {type: String, require:true},
+    description : String,
+    status : String,
+    startDate : {type: Date, required: true},
+    endDate : {type: Date, required: true},
+    project_id : String,
+    employee_id : String,
+    manager_id : String,
 });
 
 const Tasks = mongoose.model('Tasks', taskSchema)

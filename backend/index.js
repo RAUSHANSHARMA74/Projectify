@@ -1,14 +1,14 @@
 const express = require("express")
 const {connection} = require("./config/connection")
-const {professorsRouter} = require("./router/professorRouter")
-const {studentRouter} = require("./router/studentRouter")
+const {managerRouter} = require("./router/managerRouter")
+const {employeeRouter} = require("./router/employeeRouter")
 require("dotenv").config()
 
 const app = express()
 
 app.use(express.json())
-app.use("/professors", professorsRouter)
-app.use("/students", studentRouter)
+app.use("/manager", managerRouter)
+app.use("/employee", employeeRouter)
 
 
 

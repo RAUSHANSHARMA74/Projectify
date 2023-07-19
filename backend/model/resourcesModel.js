@@ -2,10 +2,11 @@
 const mongoose = require("mongoose")
 
 const resourceSchema = mongoose.Schema({
-    type : String,
-    link : String,
-    isLocked : String,
-    password : String
+    resourceName : {type : String, required:true},
+    description : {type : String, required : true},
+    type : {type: String, required: true},
+    availability : Boolean,
+    task_id : Array
 });
 
 const Resources = mongoose.model('Resources', resourceSchema)
