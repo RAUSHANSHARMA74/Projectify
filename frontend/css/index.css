@@ -1,0 +1,106 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply styles to the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #354f52;
+}
+
+/* Apply styles to the container */
+.container {
+    text-align: center;
+    /* padding: 20px; */
+}
+
+/* Apply styles to the navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #354f52;
+    padding: 15px;
+    color: #fff;
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar img {
+    width: 55px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.navbar p {
+    font-size: 1.2rem;
+}
+
+/* Style the navigation links */
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1rem;
+    margin-right: 15px;
+}
+
+/* Apply animation to navigation links on hover */
+.nav-links a:hover {
+    transform: scale(1.1);
+}
+
+.nav-links>button{
+    /* border: 1px solid #354f52; */
+    border: 0px;
+    color: white;
+    font-size: 18px;
+    padding: 5px 20px;
+    border-radius: 3px;
+    background-color: #2354a1;
+    cursor: pointer;
+}
+.nav-links>button:hover{
+    background-color: #4287f5;
+}
+/* Apply animation to the main heading */
+.main-heading {
+    font-size: 2.5rem;
+    margin-top: 40px;
+    color: #354f52;
+    /* Add an animation to the main heading */
+    animation: fadeInUp 1s ease;
+}
+
+/* Apply styles to the topic */
+.topic {
+    max-width: 800px;
+    margin: 0 auto; /* This will center the .topic class horizontally */
+    margin-top: 30px;
+    opacity: 0; /* Initially set opacity to 0 */
+    animation: fadeIn 1s ease 0.5s forwards; /* Apply the fadeIn animation to the .topic class */
+}
+
+/* Keyframes for the fadeInUp animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes for the fadeIn animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
