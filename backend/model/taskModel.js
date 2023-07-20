@@ -9,7 +9,7 @@ const taskSchema = mongoose.Schema({
     endDate : {type: Date, required: true},
     project_id : String,
     employee_id : String,
-    manager_id : String,
+    resource_id : Array
 });
 
 const Tasks = mongoose.model('Tasks', taskSchema)
