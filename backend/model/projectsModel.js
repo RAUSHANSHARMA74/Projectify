@@ -7,6 +7,8 @@ const projectSchema = mongoose.Schema({
    status : String,
    startDate : {type : Date, required : true},
    endDate : {type : Date, required : true},
+   manager_id : String,
+   task_id : Array
 });
 
 const Projects = mongoose.model('Projects', projectSchema)
