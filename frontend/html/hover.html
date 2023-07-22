@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ID Copy Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .clickable-text {
+      cursor: pointer;
+      color: blue;
+      position: relative;
+    }
+
+    .id-message {
+      display: none;
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 5px;
+      border-radius: 5px;
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p class="clickable-text" data-id="1">Text 1</p>
+    <p class="clickable-text" data-id="2">Text 2</p>
+    <p class="clickable-text" data-id="3">Text 3</p>
+    <p class="clickable-text" data-id="4">Text 4</p>
+  </div>
+
+  <div class="id-message" id="copyMessage">ID copied</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const clickableTexts = document.querySelectorAll(".clickable-text");
+
+      clickableTexts.forEach((text) => {
+        text.addEventListener("click", () => {
+          const id = text.dataset.id;
+          copyToClipboard(id);
+          showCopyMessage(text);
+        });
+      });
+    });
+
+    function copyToClipboard(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+    }
+
+    function showCopyMessage(textElement) {
+      const copyMessage = document.getElementById("copyMessage");
+      const textRect = textElement.getBoundingClientRect();
+      const messageRect = copyMessage.getBoundingClientRect();
+      const topPosition = textRect.top - messageRect.height - 5;
+      const leftPosition = textRect.left + textRect.width / 2 - messageRect.width / 2;
+
+      copyMessage.style.top = `${topPosition}px`;
+      copyMessage.style.left = `${leftPosition}px`;
+      copyMessage.style.display = "block";
+
+      setTimeout(() => {
+        copyMessage.style.display = "none";
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

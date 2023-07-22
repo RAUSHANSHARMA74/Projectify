@@ -1,17 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Employee | Page</title>
-    <link rel="stylesheet" href="../css/employee.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/employee.css" />
+    <script src="../js/employee.js" defer></script>
+  </head>
+  <body>
     <div class="container">
-        <nav>
-            <a href="../index.html">Home</a>
-        </nav>
+      <header class="navbar">
+        <div class="logo">
+          <img
+            src="../image/project-logo.avif"
+            alt="Pulsar Logo"
+            aria-label="Pulsar Logo"
+          />
+          <a href="../index.html">Home</a>
+        </div>
+        <h1>Employee Work Detail</h1>
+      </header>
+      
+      <nav class="allbtn" aria-label="Filter Buttons">
+        <button class="projectBtn">Project</button>
+        <button class="taskBtn">Task</button>
+        <button class="resourceBtn">Resource</button>
+        <button class="managerBtn">Manager</button>
+      </nav>
+
+      <main>
+        <section class="data-section">
+          <!-- Data will be dynamically added through JavaScript -->
+          <table class="project">
+            <thead>
+              <tr>
+                <th>Project-Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Start-Date</th>
+                <th>End-Date</th>
+                <th>Manager-Name</th>
+                <th>Task-Name</th>
+              </tr>
+            </thead>
+            <tbody>
+                 <!-- Rows will be added dynamically here -->
+            </tbody>
+          </table>
+          <table class="task">
+            <thead>
+              <tr>
+                <th>Project-Name</th>
+                <th>Task-Name</th>
+                <th>Description</th>
+                <th>Start-Date</th>
+                <th>End-Date</th>
+                <th>Resource-Name</th>
+                <th>Status</th>
+                <th>Update-S</th>
+              </tr>
+            </thead>
+            <tbody>
+                 <!-- Rows will be added dynamically here -->
+            </tbody>
+          </table>
+          <table class="resource">
+            <thead>
+              <tr>
+                <th>Task-Name</th>
+                <th>Resource-Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Availabal</th>
+              </tr>
+            </thead>
+            <tbody>
+                 <!-- Rows will be added dynamically here -->
+            </tbody>
+          </table>
+          <table class="manager">
+            <thead>
+              <tr>
+                <th>Manager-Name</th>
+                <th>Employee-Name</th>
+                <th>Project-Name</th>
+                <th>Task-Name</th>
+                <th>resource-Name</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rows will be added dynamically here -->
+            </tbody>
+          </table>
+        </section>
+      </main>
     </div>
-</body>
+  </body>
 </html>
-<script src="../js/employee.js"></script>

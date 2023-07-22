@@ -4,11 +4,178 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
-    <h1>Amin Page</h1>
-        
+    <div class="container">
+        <header class="navbar">
+            <div class="logo">
+              <img
+                src="../image/project-logo.avif"
+                alt="Pulsar Logo"
+                aria-label="Pulsar Logo"
+              />
+              <a href="../index.html">Home</a>
+            </div>
+            <h1>Admin Work Detail</h1>
+        </header>
+
+        <div class="content">
+            <div class="worker">
+                <button class="projectBtn">Project</button>
+                <button class="managerBtn active">Manager</button>
+                <button class="employeeBtn">Employee</button>
+
+            </div>
+            <div class="worker-child">
+                <div class="first" >
+                    <form action="" class="projectform form-container">
+                        <input type="text" name="" id="id", placeholder="ProjectId" readonly>
+                        <input type="text" name="" id="projectName" placeholder="Enter Project Name" required>
+                        <input type="text" name="" id="description", placeholder="Enter Description" required>
+                        <input type="number" name="" id="status" placeholder="Stauts" required>
+                        <label for="">Start Date</label>
+                        <input type="date" name="" id="startDate" required>
+                        <label for="">End Date</label>
+                        <input type="date" name="" id="endDate" required>
+                        <input type="text" name="" id="manager" placeholder="Enter ManagerId" readonly>
+                        <button class="projectSubmit" type="submit">Project Add</button>
+                    </form>
+                    <form action="" class="managerform form-container">
+                        <input type="text" name="" id="managerId" placeholder="Manager ID">
+                        <input type="text" name="" id="managerName" placeholder="Enter Name">
+                        <input type="email" name="" id="managerEmail" placeholder="Enter Email">
+                        <input type="text" name="" id="managerProjects" placeholder="Project Detail">
+                        <button class="managerSubmit" type="submit">Submit</button>
+                    </form>
+
+                    <form action="" class="employeeform form-container" style="display: none;">
+                        <input type="text" name="" id="employeeId" placeholder="Employee ID">
+                        <input type="text" name="" id="employeeName" placeholder="Employee Name">
+                        <input type="email" name="" id="employeeEmail" placeholder="Enter Email">
+                        <input type="text" name="" id="employeeProjects" placeholder="Projects Name">
+                        <input type="text" name="" id="employeeTasks" placeholder="Enter Tasks">
+                        <input type="text" name="" id="employeeResources" placeholder="Enter Resource">
+                        <button class="employeeSubmit" type="submit">Submit</button>
+                    </form>
+                </div>
+                <div class="second">
+                    <table class="project">
+                        <thead>
+                            <tr>
+                                <th>Project-Name</th>
+                                <th>Manager-Name</th>
+                                <th>Employees-Name</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Start-Date</th>
+                                <th>End-Date</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="projectTable">
+                            <!-- <tr>
+                                <td>Project-Name</td>
+                                <td>Manager-Name</td>
+                                <td>
+                                    <ol>
+                                        <li>Employee-Name</li>
+                                        <li>Employee-Name</li>
+                                        <li>Employee-Name</li>
+                                        <li>Employee-Name</li>
+                                    </ol>
+                                </td>
+                                <td>Description</td>
+                                <td>Status</td>
+                                <td>Start-Date</td>
+                                <td>End-Date</td>
+                                <td class="projectUpdate" data-id="">Update</td>
+                                <td class="projectDelete" data-id="">Delete</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                    <table class="manager">
+                        <thead>
+                            <tr>
+                                <th>Manager-Name</th>
+                                <th>Email</th>
+                                <th>Is-Manager</th>
+                                <th>Projects-Name</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="managerTable">
+                            <!-- <tr>
+                                <td>Manager-Name</td>
+                                <td>raushansharma7462@gmail.com</td>
+                                <td>Is-Manager</td>
+                                <td>
+                                    <ol>
+                                        <li>Projects-Name</li>
+                                        <li>Projects-Name</li>
+                                        <li>Projects-Name</li>
+                                        <li>Projects-Name</li>
+                                        <li>Projects-Name</li>
+                                    </ol>
+                                </td>
+                                <td class="managerUpdate" data-id="">Update</td>
+                                <td class="managerDelete" data-id="">Delete</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                    <table class="employee" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Employee-Name</th>
+                                <th>Email</th>
+                                <th>Projects-Name</th>
+                                <th>Tasks-Name</th>
+                                <th>Resources-Name</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="employeeTable">
+                            <tr>
+                                <td>Employee-Name</td>
+                                <td>Email</td>
+                                <td>
+                                    <ol>
+                                        <li>Projects-Name</li>
+                                        <li>Projects-Name</li>
+                                        <li>Projects-Name</li>
+                                        <li>Projects-Name</li>
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                                        <li>Tasks-Name</li>
+                                        <li>Tasks-Name</li>
+                                        <li>Tasks-Name</li>
+                                        <li>Tasks-Name</li>
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                                        <li>Resources-Name</li>
+                                        <li>Resources-Name</li>
+                                        <li>Resources-Name</li>
+                                        <li>Resources-Name</li>
+                                    </ol>
+                                </td>
+                                <td class="employeeUpdate" data-id="">Update</td>
+                                <td class="employeeDelete" data-id="">Delete</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/admin.js"></script>
 </body>
 </html>
-<script src="../js/admin.js"></script>

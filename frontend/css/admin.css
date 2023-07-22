@@ -1,0 +1,177 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f7f7f7;
+}
+
+/* Navbar Styles */
+.navbar {
+    border: 1px solid grey;
+    color: white;
+    display: flex;
+    background-color: #615faf;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: white;
+    font-size: 23px;
+}
+
+.logo img {
+    width: 55px;
+    margin-right: 10px;
+}
+
+.navbar h1 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.worker {
+    border: 1px solid grey;
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    align-items: center;
+}
+
+.worker > button {
+    border: 0;
+    padding: 5px 15px;
+    margin: 5px;
+    background-color: #615faf;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.worker-child {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.first {
+    /* border: 1px solid red; */
+    border-right: 1px solid grey;
+    width: 20%;
+}
+
+.second {
+    /* border: 1px solid red; */
+    width: 80%;
+    height: 817px;
+    overflow: auto;
+}
+
+/* Common styles for manager and employee tables */
+table {
+    border: 1px solid green;
+    border-collapse: collapse;
+    width: 95%;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 15px;
+}
+
+th, td {
+    border: 1px solid #4287f5;
+    padding: 10px;
+}
+
+/* Styles for the manager table */
+.manager {
+    /* Add specific styles for the manager table if needed */
+    
+}
+
+/* Styles for the employee table */
+.employee {
+    /* Add specific styles for the employee table if needed */
+}
+table ul,
+table ol {
+    list-style: none;
+    padding: 0;
+}
+
+
+table ol li {
+    border: 1px solid #4287f5;
+    margin-bottom: 5px;
+    padding: 5px;
+    
+}
+
+/* Adjusting ol and ul tags */
+table ul,
+table ol {
+    list-style: none;
+    padding: 0;
+}
+
+table ul {
+    counter-reset: item;
+}
+
+table ol {
+    counter-reset: item;
+}
+
+
+table ol li::before {
+    content: counter(item) ".";
+    counter-increment: item;
+    margin-right: 0px;
+}
+
+
+/* Form container styles */
+.form-container {
+    border: 1px solid grey;
+    width: 90%;
+    margin: 10px auto;
+    padding: 15px;
+}
+
+.form-container input {
+    display: block;
+    width: 100%;
+    /* margin: 5px; */
+    margin: 10px 0px;
+    padding: 5px;
+    outline: none;
+}
+
+.form-container button {
+    display: block;
+    width: 100%;
+    margin: 10px auto;
+    padding: 8px;
+    background-color: #615faf;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #00b5b5;
+}
+

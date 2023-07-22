@@ -1,13 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager | Page</title>
-    <link rel="stylesheet" href="../css/manager.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager | Page</title>
+  <link rel="stylesheet" href="../css/manager.css" />
 </head>
 <body>
-    <h1>Manager</h1>
+  <div class="container">
+    <header class="navbar">
+      <div class="logo">
+        <img
+          src="../image/project-logo.avif"
+          alt="Pulsar Logo"
+          aria-label="Pulsar Logo"
+        />
+        <a href="../index.html">Home</a>
+      </div>
+      <h1>Manager Work Detail</h1>
+    </header>
+
+    <div class="container-child">
+      <nav class="allbtn" aria-label="Filter Buttons">
+        <button class="employeeBtn">Employee</button>
+        <button class="projectBtn">Project</button>
+        <button class="taskBtn">Task</button>
+        <button class="resourceBtn">Resource</button>
+      </nav>
+      <div class="containerForm">
+        <div class="allForm">
+          <form action="" class="taskForm form-container">
+            <input type="text" name="taskName" id="taskName" placeholder="Task Name">
+            <input type="text" name="employeeName" id="employeeName" placeholder="Enter Employee ID">
+            <input type="text" name="projectName" id="projectName" placeholder="Enter Project ID">
+            <input type="text" name="description" id="description" placeholder="Enter Description">
+            <label for="startDate">Start-Date</label>
+            <input type="date" name="startDate" id="startDate">
+            <label for="endDate">End-Date</label>
+            <input type="date" name="endDate" id="endDate">
+            <button class="submitTask" type="submit">Submit Task</button>
+          </form>
+          <form action="" class="resourceForm form-container">
+            <input type="text" name="resourceName" id="resourceName" placeholder="Enter Resource Name">
+            <input type="text" name="taskId" id="taskId" placeholder="Enter Task ID">
+            <input type="text" name="resourceDescription" id="resourceDescription" placeholder="Enter Description">
+            <input type="text" name="type" id="type" placeholder="Type">
+            <select name="availability" id="availability">
+              <option value="">Is Available</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+            <button class="submitResource" type="submit">Submit Resource</button>
+          </form>
+        </div>
+
+        <main>
+          <section class="data-section">
+            <!-- Data will be dynamically added through JavaScript -->
+            <div class="table-container">
+              <table class="employee">
+                <thead>
+                  <tr>
+                    <th>Employee-Name</th>
+                    <th>Project-Name</th>
+                    <th>Tasks-Name</th>
+                    <th>Resource-Name</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rows will be added dynamically here -->
+                    <td>Employee-Name</td>
+                    <td>Project-Name</td>
+                    <td>Tasks-Name</td>
+                    <td>Resource-Name</td>
+                    <td>Status</td>
+                </tbody>
+              </table>
+
+              <table class="project">
+                <thead>
+                  <tr>
+                    <th>Project-Name</th>
+                    <th>Description</th>
+                    <th>Start-Date</th>
+                    <th>End-Date</th>
+                    <th>Employee-Name</th>
+                    <th>Task-Name</th>
+                    <th>Status</th>
+                    <th>Update-S</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rows will be added dynamically here -->
+                  <tr>
+                    <td>Project-Name</td>
+                    <td>Description</td>
+                    <td>Start-Date</td>
+                    <td>End-Date</td>
+                    <td>Employee-Name</td>
+                    <td>Task-Name</td>
+                    <td>Status</td>
+                    <td><select name="" id="">
+                        <option value="">Project-Update</option>
+                        <option value="2">IN Progress</option>
+                        <option value="1">Complete</option>
+                    </select></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="task">
+                <thead>
+                  <tr>
+                    <th>Task-Name</th>
+                    <th>Employee-Name</th>
+                    <th>Project-Name</th>
+                    <th>Description</th>
+                    <th>Start-Date</th>
+                    <th>End-Date</th>
+                    <th>Resource-Name</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rows will be added dynamically here -->
+                  <tr>
+                    <td>Task-Name</td>
+                    <td>Employee-Name</td>
+                    <td>Project-Name</td>
+                    <td>Description</td>
+                    <td>Start-Date</td>
+                    <td>End-Date</td>
+                    <td>Resource-Name</td>
+                    <td>Status</td>
+                    <td class="taskUpdate">Update</td>
+                    <td class="taskDelete">Delete</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="resource">
+                <thead>
+                  <tr>
+                    <th>Resource-Name</th>
+                    <th>Task-Name</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Available</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rows will be added dynamically here -->
+                  <tr>
+                    <td>Resource-Name</td>
+                    <td>Task-Name</td>
+                    <td>Description</td>
+                    <td>Type</td>
+                    <td>Available</td>
+                    <td class="resourceUpdate">Update</td>
+                    <td class="resourceDelete">Delete</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+  <script src="../js/manager.js" defer></script>
 </body>
 </html>
-<script src="../js/manager.js"></script>

@@ -1,0 +1,188 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f7f7f7;
+}
+
+/* Navbar Styles */
+.navbar {
+    border: 1px solid grey;
+    color: white;
+    display: flex;
+    background-color: #615faf;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: white;
+    font-size: 23px;
+}
+
+.logo img {
+    width: 55px;
+    margin-right: 10px;
+}
+
+.navbar h1 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+main {
+    /* border: 1px solid red; */
+    border-left: 1px solid #615faf;
+    width: 80%;
+    height: 853px; 
+    overflow: auto;
+    margin: auto;
+    padding: 0px 45px;
+}
+
+.allbtn {
+    /* border: 1px solid red; */
+    border-bottom: 1px solid #615faf;
+    display: flex;
+    justify-content: right;
+}
+
+.allbtn > button {
+    border: 0;
+    margin: 5px 0;
+    background-color: #1b82ff;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px 15px;
+    margin: 5px;
+    width: 120px;
+    font-size: 18px;
+}
+
+.allbtn > button:hover {
+    background-color: #00b5b5;
+}
+
+.allbtn > button.active {
+    background-color: #00b5b5;
+}
+
+.allbtn>button.active {
+    background-color: #00b5b5; 
+}
+.allForm{
+    /* border: 1px solid red; */
+    width: 20%;
+}
+.containerForm{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+}
+.form-container{
+    border: 1px solid grey;
+    width: 90%;
+    margin: 10px auto;
+    padding: 15px;
+}
+.form-container input{
+    display: block;
+    width: 100%;
+    /* margin: 5px; */
+    margin: 10px 0px;
+    padding: 5px;
+    outline: none;
+}
+
+.form-container button{
+    display: block;
+    width: 100%;
+    margin: 10px auto;
+    padding: 8px;
+    background-color: #615faf;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+/* Table Styles */
+table {
+    border: 1px solid #1b82ff;
+    border-collapse: collapse;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid #1b82ff;
+    padding: 5px 2px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Adjusting ol and ul tags */
+.table-container ul,
+.table-container ol {
+    list-style: none;
+    padding: 0;
+}
+
+
+
+/* Adjusting ol and ul tags */
+.table-container ul,
+.table-container ol {
+    list-style: none;
+    padding: 0;
+}
+
+.table-container ul {
+    counter-reset: item;
+}
+
+.table-container ol {
+    counter-reset: item;
+}
+
+.table-container ul li::before,
+.table-container ol li::before {
+    content: counter(item) ".";
+    counter-increment: item;
+    margin-right: 5px;
+}
+
+/* Media query for responsive design */
+@media only screen and (max-width: 600px) {
+    .allbtn {
+        flex-wrap: wrap;
+    }
+
+    .allbtn > button {
+        margin: 10px 0;
+    }
+}

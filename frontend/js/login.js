@@ -66,7 +66,7 @@ login.addEventListener("submit", async (event) => {
           text: responseData.message,
         });
       } else {
-        let swalvalue = Swal.fire(responseData.message, responseData.name, "success").value;
+        Swal.fire(responseData.message, responseData.name, "success");
         localStorage.setItem("detail", JSON.stringify(responseData));
         // window.location.href = "../index.html"
       }

@@ -1,0 +1,104 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+/* Navbar Styles */
+.navbar {
+    border: 1px solid grey;
+    color: white;
+    display: flex;
+    background-color: #615faf;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: white;
+    font-size: 23px;
+}
+
+.logo img {
+    width: 55px;
+    margin-right: 10px;
+}
+
+.navbar h1 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Button Styles */
+.allbtn {
+    /* border: 1px solid #615faf; */
+    border-bottom: 1px solid #615faf;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px;
+}
+
+.allbtn>button {
+    border: 0px solid #1b82ff;
+    padding: 8px;
+    width: 200px;
+    font-size: 20px;
+    background-color: #1b82ff;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.allbtn>button:hover {
+    background-color: #00b5b5;
+}
+
+/* Table Styles */
+table {
+    border: 1px solid #1b82ff;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 50px auto;
+    font-size: 20px;
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid #1b82ff;
+    padding: 10px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Media query for responsive design */
+@media only screen and (max-width: 600px) {
+    .allbtn {
+        flex-wrap: wrap;
+    }
+
+    .allbtn>button {
+        margin: 10px 0;
+    }
+}
