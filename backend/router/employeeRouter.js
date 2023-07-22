@@ -1,7 +1,7 @@
 
 const express = require("express")
 const employeeRouter = express.Router()
-const {Employee} = require("../model/employeeModel")
+const {Employees} = require("../model/employeeModel")
 const {employeeAuth} = require("../authorization/employeeAuth")
 const {Tasks} = require("../model/taskModel")
 const {Resources} = require("../model/resourcesModel")
@@ -68,7 +68,8 @@ employeeRouter.post("/login", async (req, res)=>{
     }
 })
 
-employeeRouter.use(employeeAuth)
+// employeeRouter.use(employeeAuth)
+
 
 employeeRouter.get("/projectDetail", async (req, res) =>{
     try {

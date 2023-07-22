@@ -1,7 +1,7 @@
 const express = require("express");
 const adminRouter = express.Router();
 const { Admin } = require("../model/adminModel");
-const { Employee } = require("../model/employeeModel");
+const { Employees } = require("../model/employeeModel");
 const { Managers } = require("../model/managerModel");
 const { Projects } = require("../model/projectsModel");
 const { Tasks } = require("../model/taskModel");
@@ -61,35 +61,37 @@ adminRouter.post("/login", async (req, res) => {
   }
 });
 
-adminRouter.use(adminAuth);
+// adminRouter.use(adminAuth);
+
+adminRouter.post("/projects", async (req, res)=>{
+  try {
+    let projectData = new Projects(req.body)
+    await projectData.save()
+    res.send({message : "Project Added"})
+  } catch (error) {
+    console.log("something went wrong in /project")
+    console.log(error)
+  }
+})
+
+
 
 //Manager Data
 adminRouter.get("/managers", async (req, res) => {
   try {
-    let manager_id = req.query.manager_id;
-    if (manager_id) {
-      let managerData = await Managers.find({ _id: manager_id });
-      res.send({ message: "Manager Data", managerData });
-    } else {
-      let managerData = await Managers.find();
-      res.send({ message: "Manager Data", managerData });
-    }
+    let managerData = await Managers.find();
+    res.send({ message: "Manager Data", managerData });
   } catch (error) {
     console.log("something went wrong in /manager");
+    console.log(error)
   }
 });
 
 //Employee Data
 adminRouter.get("/employees", async (req, res) => {
   try {
-    let employee_id = req.query.employee_id;
-    if (employee_id) {
-      let employeeData = await Employee.find({ _id: employee_id });
-      res.send({ message: "Employee Data", employeeData });
-    } else {
-      let employeeData = await Employee.find();
-      res.send({ message: "Employee Data", employeeData });
-    }
+    let employeeData = await Employees.find();
+    res.send({ message: "Employee Data", employeeData });
   } catch (error) {
     console.log("something went wrong in /employee");
   }
