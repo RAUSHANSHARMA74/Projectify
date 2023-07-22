@@ -5,10 +5,9 @@ const employeeSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },
-  project_id : String,
-  task_id: Array,
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Projects' }],
 });
 
-const Employee = mongoose.model("Employee", employeeSchema);
+const Employees = mongoose.model("Employees", employeeSchema);
 
-module.exports = { Employee };
+module.exports = { Employees };
