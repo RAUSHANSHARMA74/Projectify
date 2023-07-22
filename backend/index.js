@@ -2,6 +2,8 @@ const express = require("express")
 const {connection} = require("./config/connection")
 const {managerRouter} = require("./router/managerRouter")
 const {employeeRouter} = require("./router/employeeRouter")
+const {adminRouter} =require("./router/adminRouter")
+
 const cors = require("cors")
 require("dotenv").config()
 
@@ -11,6 +13,7 @@ app.use(cors())
 app.use(express.json())
 app.use("/manager", managerRouter)
 app.use("/employee", employeeRouter)
+app.use("/admin", adminRouter)
 
 
 

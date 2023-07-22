@@ -13,8 +13,9 @@ let managerAuth = async (req, res, next) => {
     if (!decoded) {
       res.send({ message: "Not Authorized" });
     } else {
-      let deenData = await Managers.findOne({ email: decoded.manager });
+      let managerData = await Managers.findOne({ email: decoded.manager });
       if (deenData != null) {
+        req.body["id"] = managerData._id
         next();
       } else {
         res.send({ message: "Not Authorized" });
