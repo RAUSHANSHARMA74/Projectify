@@ -26,7 +26,7 @@ employeeRouter.get("/", async (req, res)=>{
 employeeRouter.post("/register", async (req, res)=>{
     try {
         let {name, email, password, role} = req.body;
-        let dataAvailable = await Employee.findOne({email})
+        let dataAvailable = await Employees.findOne({email})
         if(dataAvailable != null){
             res.send({message : "You are already user, need to login"})
             return
@@ -35,7 +35,7 @@ employeeRouter.post("/register", async (req, res)=>{
             if(err){
                 res.send({message : "something went wrong in hash password"})
             }else{
-                let registerEmployee = new Employee({name, email, password: hash, role})
+                let registerEmployee = new Employees({name, email, password: hash, role})
                 await registerEmployee.save()
                 res.send({message : `successfully Register`, name})
             }
@@ -51,7 +51,7 @@ employeeRouter.post("/register", async (req, res)=>{
 employeeRouter.post("/login", async (req, res)=>{
     try {
         let {email, password} = req.body;
-        let dataAvailable = await Employee.findOne({email})
+        let dataAvailable = await Employees.findOne({email})
         if(dataAvailable == null){
             res.send({message : "You are not user plz Register", error:"error"})
             return
@@ -71,15 +71,31 @@ employeeRouter.post("/login", async (req, res)=>{
 // employeeRouter.use(employeeAuth)
 
 
-employeeRouter.get("/projectDetail", async (req, res) =>{
+employeeRouter.get("/employees", async (req, res) => {
     try {
-        let projectDetail = await Projects.find();
-        res.send({message : "All Project Detail", projectDetail})
-        
+      let id = req.query.id; // Use req.query to get the id from the URL
+      let employeeData = await Employees.find().select('-password').populate({
+        path: 'tasks',
+        populate: [
+          {
+            path: 'project',
+            model: 'Projects',
+          },
+          {
+            path: 'resources',
+            model: 'Resources',
+          }
+        ]
+      });
+      res.send({ message: "Employee Detail", employeeData });
+  
     } catch (error) {
-        console.log("something went wrong wrong in")
+      console.log("Something went wrong in /employees");
+      console.log(error);
+      res.status(500).send({ error: "Internal Server Error" });
     }
-})
+  });
+  
 
 
 module.exports = {employeeRouter}

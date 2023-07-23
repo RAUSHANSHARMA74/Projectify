@@ -40,13 +40,18 @@
                         <input type="date" name="" id="startDate" required>
                         <label for="">End Date</label>
                         <input type="date" name="" id="endDate" required>
-                        <input type="text" name="" id="manager" placeholder="Enter ManagerId" readonly>
+                        <input type="text" name="" id="managerId" placeholder="Enter ManagerId" readonly>
                         <button class="projectSubmit" type="submit">Project Add</button>
                     </form>
                     <form action="" class="managerform form-container">
-                        <input type="text" name="" id="managerId" placeholder="Manager ID">
+                        <input type="text" name="" id="managerId" placeholder="Enter ManagerID" >
                         <input type="text" name="" id="managerName" placeholder="Enter Name">
                         <input type="email" name="" id="managerEmail" placeholder="Enter Email">
+                        <select name="" id="isManager">
+                            <option value="">Is Manager</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
                         <input type="text" name="" id="managerProjects" placeholder="Project Detail">
                         <button class="managerSubmit" type="submit">Submit</button>
                     </form>

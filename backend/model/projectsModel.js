@@ -4,11 +4,11 @@ const mongoose = require("mongoose")
 const projectSchema = mongoose.Schema({
    projectName: { type: String, required: true },
    description: String,
-   status: String,
+   status: {type : String, default : "3"},
    startDate: { type: Date, required: true },
    endDate: { type: Date, required: true },
    manager: { type: mongoose.Schema.Types.ObjectId, ref: 'Managers' },
-   employee: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employees" }],
+   employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employees" }],
    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tasks' }],
  });
 

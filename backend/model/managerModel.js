@@ -5,7 +5,7 @@ const managerSchema = mongoose.Schema({
       email: { type: String, required: true },
       password: { type: String, required: true },
       role: { type: String, required: true },
-      isManager: { type: Boolean, default: true },
+      isManager: { type: Boolean, default: false },
       projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Projects' }],
 });
 const Managers = mongoose.model("Managers", managerSchema);
