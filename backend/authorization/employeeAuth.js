@@ -15,6 +15,7 @@ let employeeAuth = async (req, res, next) => {
     } else {
       let deenData = await Employee.findOne({ email: decoded.employee });
       if (deenData != null) {
+        req.body["id"] = deenData._id
         next();
       } else {
         res.send({ message: "Not Authorized" });

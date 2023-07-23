@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const taskSchema = mongoose.Schema({
   taskName: { type: String, require: true },
   description: String,
-  status: String,
+  status: {type: String, default:"3"},
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   project: { type: mongoose.Schema.Types.ObjectId, ref: "Projects" },

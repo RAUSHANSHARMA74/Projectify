@@ -44,44 +44,21 @@ body {
     align-items: center;
 }
 
-/* Button Styles */
-.allbtn {
-    /* border: 1px solid #615faf; */
-    border-bottom: 1px solid #615faf;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 15px;
-}
 
-.allbtn>button {
-    border: 0px solid #1b82ff;
-    padding: 8px;
-    width: 200px;
-    font-size: 20px;
-    background-color: #1b82ff;
-    color: white;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.allbtn>button:hover {
-    background-color: #00b5b5;
-}
-
+/* Table Styles */
 /* Table Styles */
 table {
     border: 1px solid #1b82ff;
     border-collapse: collapse;
-    width: 80%;
-    margin: 50px auto;
-    font-size: 20px;
+    font-size: 18px;
+    width: 98%;
     text-align: center;
+    margin: 20px auto;
 }
 
 th, td {
     border: 1px solid #1b82ff;
-    padding: 10px;
+    padding: 5px 2px;
 }
 
 th {
@@ -91,6 +68,42 @@ th {
 table tbody tr:hover {
     background-color: #f2f2f2;
 }
+
+/* Adjusting ol and ul tags */
+
+.employeeTable ol {
+    list-style: none;
+    padding: 0;
+}
+
+li{
+    border: 1px solid #1b82ff;
+    margin: 2px;
+}
+
+/* Adjusting ol and ul tags */
+
+.employeeTable ol {
+    list-style: none;
+    padding: 0;
+}
+
+.employeeTable ul {
+    counter-reset: item;
+}
+
+.employeeTable ol {
+    counter-reset: item;
+}
+
+.employeeTable ul li::before,
+.employeeTable ol li::before {
+    content: counter(item) ".";
+    counter-increment: item;
+    margin-right: 5px;
+}
+
+
 
 /* Media query for responsive design */
 @media only screen and (max-width: 600px) {

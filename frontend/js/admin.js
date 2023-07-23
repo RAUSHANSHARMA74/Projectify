@@ -103,16 +103,19 @@ let url = "http://localhost:1481/";
 //     console.log("employeeUpdate")
 // })
 
+let globalProjectData = []
+let globalManagerData = []
 
 //GET PROJECT DATA
 async function getProjectData(){
     try {
         let res = await fetch(`${url}admin/projects`)
         if(res.ok){
-            let projectData = await res.json()
-            projectData = projectData.projectData
-            console.log(projectData)
-            showProjectData(projectData)
+            let data = await res.json()
+            data = data.projectsData
+            console.log(data)
+            globalProjectData = data
+            showProjectData(data)
         }
     } catch (error) {
         console.log("something went wrong in get project Data")
@@ -125,9 +128,7 @@ function showProjectData(data) {
     projectTable.innerHTML = "";
 
     let showData = data.map((elm, index) => {
-    let managerName = elm.manager ? elm.manager.name : "N/A";
-
-    let employeeList = elm.employees
+    let employeeList = elm.employees && elm.employees.length > 0
       ? `<ol>${elm.employees.map((employee) => `<li>${employee.name}</li>`).join("")}</ol>`
       : "No employees assigned";
 
@@ -146,19 +147,67 @@ function showProjectData(data) {
     return `
       <tr>
         <td>${elm.projectName}</td>
-        <td>${managerName}</td>
+        <td data-id="${elm.managerId}" >${elm.managerName}</td>
         <td>${employeeList}</td>
         <td>${elm.description}</td>
         <td>${elm.status === "1" ? "Completed" : elm.status== "2" ? "IN Progress" : "Not Yet Start"}</td>
         <td>${formattedStartDate}</td>
         <td>${formattedEndDate}</td>
-        <td class="projectUpdate" data-id="${elm._id}">Update</td>
-        <td class="projectDelete" data-id="${elm._id}">Delete</td>
+        <td class="projectUpdate" data-id="${elm.projectId}">Update</td>
+        <td class="projectDelete" data-id="${elm.projectId}">Delete</td>
       </tr>
     `;
   });
 
   projectTable.innerHTML = showData.join(""); 
+
+  let projectUpdate = document.querySelectorAll(".projectUpdate")
+  for(let projectbtn of projectUpdate){
+    projectbtn.addEventListener("click", ()=>{
+        let id = projectbtn.dataset.id
+        // console.log(id)
+        let filterProjectData = globalProjectData.filter((elm, index)=>{
+            return elm.projectId==id
+        })
+        filterProjectData = filterProjectData[0]
+        // console.log(filterProjectData)
+        projectForm.managerId.removeAttribute('readonly')
+        projectForm.id.removeAttribute('readonly')
+        projectForm.id.value = filterProjectData.projectId
+        projectForm.projectName.value = filterProjectData.projectName
+        projectForm.description.value = filterProjectData.description;
+        projectForm.status.value = filterProjectData.status;
+        const startDate = new Date(filterProjectData.startDate).toISOString().split('T')[0];
+        const endDate = new Date(filterProjectData.endDate).toISOString().split('T')[0];
+        projectForm.startDate.value = startDate;
+        projectForm.endDate.value = endDate;
+        projectForm.managerId.value = filterProjectData.managerId
+    })
+  }
+
+  //delete btn
+  let projectDelete = document.querySelectorAll(".projectDelete")
+  for(let deletebtn of projectDelete){
+    deletebtn.addEventListener("click", async ()=>{
+        let id = deletebtn.dataset.id
+        console.log(id)
+    try {
+        let res = await fetch(`${url}admin/deleteProjects/${id}`, {
+            method : "DELETE",
+            headers : {
+                "Content-Type" : "application/*json"
+            }
+        })
+        if(res.ok){
+            let data = await res.json()
+            console.log(data)
+            getProjectData()
+        }
+    } catch (error) {
+        console.log("something went wrong in delete btn")
+    }
+    })
+  }
 }
 
 
@@ -168,22 +217,24 @@ async function getManagerData(){
     try {
         let res = await fetch(`${url}admin/managers`)
         if(res.ok){
-            let managerData = await res.json()
-            managerData = managerData.managerData
-            console.log(managerData)
-            showManagerData(managerData)
+            let data = await res.json()
+            data = data.managerData
+            console.log(data)
+            showManagerData(data)
         }
     } catch (error) {
         console.log("something went wrong in get manager data")
+        console.log(error)
     }
 }
 getManagerData()
 
 let managerTable = document.querySelector(".managerTable");
 
+
 function showManagerData(data) {
   managerTable.innerHTML = "";
-
+  globalManagerData = data
   let showData = data.map((elm, index) => {
     let projectList = elm.projects && elm.projects.length > 0
       ? `<ol>${elm.projects.map((project) => `<li>${project.projectName}</li>`).join("")}</ol>`
@@ -196,7 +247,7 @@ function showManagerData(data) {
       <tr>
         <td>${elm.name}</td>
         <td>${elm.email}</td>
-        <td style="background-color: ${backgroundColor}">${managerStatus}</td>
+        <td class="ismanager" style="background-color: ${backgroundColor}">${managerStatus}</td>
         <td>${projectList}</td>
         <td class="managerUpdate" data-id="${elm._id}">Update</td>
         <td class="managerDelete" data-id="${elm._id}">Delete</td>
@@ -204,8 +255,84 @@ function showManagerData(data) {
     `;
   });
 
+
+
   managerTable.innerHTML = showData.join("");
+  let managerUpdate = document.querySelectorAll(".managerUpdate")
+  for(let managerBtn of managerUpdate){
+    managerBtn.addEventListener("click", ()=>{
+        let id = managerBtn.dataset.id
+        let filterData = globalManagerData.filter((elm, index)=>{
+            return elm._id == id
+        })
+        filterData = filterData[0]
+        console.log(filterData)
+        managerForm.managerId.removeAttribute('readonly')
+        managerForm.managerId.value = filterData._id;
+        managerForm.managerName.value = filterData.name;
+        managerForm.managerEmail.value = filterData.email;
+        managerForm.isManager.value = filterData.isManager;
+        let projectIds = filterData.projects.map((project) => project._id).join(' ');
+        managerForm.managerProjects.value = projectIds;
+    })
+  }
+  //deleted manager
+  let managerDelete = document.querySelectorAll(".managerDelete")
+  for(let managerBtn of managerDelete){
+    managerBtn.addEventListener("click", async ()=>{
+        let id = managerBtn.dataset.id
+        try {
+            let res = await fetch(`${url}admin/deleteManagers/${id}`, {
+                method : "DELETE",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+            })
+            if(res.ok){
+                let data = await res.json()
+                console.log(data)
+                getProjectData()
+            }
+        } catch (error) {
+            console.log("something wrong in delete manager data")
+        }
+    })
+  }
 }
+
+
+
+managerForm.addEventListener("submit", async (event)=>{
+    event.preventDefault()
+    let managerProjects = managerForm.managerProjects.value.split(" ")
+    let managerId = managerForm.managerId.value
+    let obj = {
+        name : managerForm.managerName.value,
+        description : managerForm.managerEmail.value,
+        isManager : managerForm.isManager.value,
+        projects : managerProjects
+    }
+    // console.log("hello")
+    // console.log(obj)
+    try {
+        let res = await fetch(`${url}admin/managers/${managerId}`, {
+            method : "PATCH",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(obj)
+        })
+        if(res.ok){
+            let data = await res.json()
+            console.log(data)
+            getProjectData()
+        }
+    } catch (error) {
+        console.log("something went wrong in admin manager update")
+    }
+})
+
+
 
 
 // GET EMPLOYEES DATA
@@ -255,20 +382,35 @@ function showEmployeesData(data) {
 
 projectForm.addEventListener("submit", async (event)=>{
     event.preventDefault()
-    let id = projectForm.id.value
+    let id = projectForm.id.value;
+    let obj = {
+        projectName : projectForm.projectName.value,
+        description : projectForm.description.value,
+        status : projectForm.status.value,
+        startDate :projectForm.startDate.value,
+        endDate : projectForm.endDate.value
+    }
     if(id){
-        console.log(id)
-    }else{
-        let obj = {
-            projectName : projectForm.projectName.value,
-            description : projectForm.description.value,
-            status : projectForm.status.value,
-            startDate : projectForm.startDate.value,
-            endDate : projectForm.endDate.value
-        }
-        console.log(obj)
         try {
-            let res = await fetch(`${url}admin/project`, {
+            obj["manager"] = projectForm.managerId.value;
+            let res = await fetch(`${url}admin/projects/${id}`, {
+                method : "PATCH",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify(obj)
+            })
+            if(res.ok){
+                let projectMessage = await res.json()
+                console.log(projectMessage)
+                getProjectData()
+            }
+        } catch (error) {
+            console.log("something went wrong in project form in post router")
+        }
+    }else{
+        try {
+            let res = await fetch(`${url}admin/projects`, {
                 method : "POST",
                 headers : {
                     "Content-Type" : "application/json"
@@ -278,8 +420,7 @@ projectForm.addEventListener("submit", async (event)=>{
             if(res.ok){
                 let projectMessage = await res.json()
                 console.log(projectMessage)
-
-                // Swal.fire(responseData.message, "Project Successful added", "success");
+                getProjectData()
             }
         } catch (error) {
             console.log("something went wrong in project form in post router")

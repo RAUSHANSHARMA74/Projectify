@@ -20,81 +20,50 @@
         </div>
         <h1>Employee Work Detail</h1>
       </header>
-      
-      <nav class="allbtn" aria-label="Filter Buttons">
-        <button class="projectBtn">Project</button>
-        <button class="taskBtn">Task</button>
-        <button class="resourceBtn">Resource</button>
-        <button class="managerBtn">Manager</button>
-      </nav>
 
-      <main>
-        <section class="data-section">
-          <!-- Data will be dynamically added through JavaScript -->
-          <table class="project">
-            <thead>
-              <tr>
-                <th>Project-Name</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Start-Date</th>
-                <th>End-Date</th>
-                <th>Manager-Name</th>
-                <th>Task-Name</th>
-              </tr>
-            </thead>
-            <tbody>
-                 <!-- Rows will be added dynamically here -->
-            </tbody>
-          </table>
-          <table class="task">
-            <thead>
-              <tr>
-                <th>Project-Name</th>
-                <th>Task-Name</th>
-                <th>Description</th>
-                <th>Start-Date</th>
-                <th>End-Date</th>
-                <th>Resource-Name</th>
-                <th>Status</th>
-                <th>Update-S</th>
-              </tr>
-            </thead>
-            <tbody>
-                 <!-- Rows will be added dynamically here -->
-            </tbody>
-          </table>
-          <table class="resource">
-            <thead>
-              <tr>
-                <th>Task-Name</th>
-                <th>Resource-Name</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Availabal</th>
-              </tr>
-            </thead>
-            <tbody>
-                 <!-- Rows will be added dynamically here -->
-            </tbody>
-          </table>
-          <table class="manager">
-            <thead>
-              <tr>
-                <th>Manager-Name</th>
-                <th>Employee-Name</th>
-                <th>Project-Name</th>
-                <th>Task-Name</th>
-                <th>resource-Name</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Rows will be added dynamically here -->
-            </tbody>
-          </table>
-        </section>
-      </main>
+      <div class="employeeTable">
+        <table>
+          <thead>
+            <tr>
+              <th>Task Name</th>
+              <th>Project Name</th>
+              <th>Task Description</th>
+              <th>Resource Name</th>
+              <th>Type</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+              <th>Update Status</th>
+            </tr>
+          </thead>
+          <tbody class="employeeTable">
+            <tr>
+              <td>Task Name</td>
+              <td>Project Name</td>
+              <td>Task Description</td>
+              <td>
+                <ol>
+                  <li>Resource Name</li>
+                  <li>Resource Name</li>
+                  <li>Resource Name</li>
+                </ol>
+              </td>
+              <td>
+                <ol>
+                  <li>Resource Description</li>
+                  <li>Resource Description</li>
+                  <li>Resource Description</li>
+                </ol>
+              </td>
+              <td>Type</td>
+              <td>Start Date</td>
+              <td>End Date</td>
+              <td>Status</td>
+              <td>Update Status</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

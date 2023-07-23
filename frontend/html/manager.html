@@ -30,10 +30,11 @@
       <div class="containerForm">
         <div class="allForm">
           <form action="" class="taskForm form-container">
+            <input type="text" name="" id="taskId" placeholder="Enter TaskId" readonly>
             <input type="text" name="taskName" id="taskName" placeholder="Task Name">
-            <input type="text" name="employeeName" id="employeeName" placeholder="Enter Employee ID">
-            <input type="text" name="projectName" id="projectName" placeholder="Enter Project ID">
             <input type="text" name="description" id="description" placeholder="Enter Description">
+            <input type="text" name="" id="employeeId" placeholder="Enter Employee ID" readonly>
+            <input type="text" name="" id="projectId" placeholder="Enter Project ID" readonly>
             <label for="startDate">Start-Date</label>
             <input type="date" name="startDate" id="startDate">
             <label for="endDate">End-Date</label>
@@ -41,9 +42,10 @@
             <button class="submitTask" type="submit">Submit Task</button>
           </form>
           <form action="" class="resourceForm form-container">
+            <input type="text" name="" id="resourceId" placeholder="Enter ResourceId" readonly>
             <input type="text" name="resourceName" id="resourceName" placeholder="Enter Resource Name">
-            <input type="text" name="taskId" id="taskId" placeholder="Enter Task ID">
-            <input type="text" name="resourceDescription" id="resourceDescription" placeholder="Enter Description">
+            <input type="text" name="taskId" id="taskId" placeholder="Enter Task ID" readonly>
+            <input type="text" name="" id="description" placeholder="Enter Description">
             <input type="text" name="type" id="type" placeholder="Type">
             <select name="availability" id="availability">
               <option value="">Is Available</option>
@@ -68,13 +70,29 @@
                     <th>Status</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="employeeTable">
                   <!-- Rows will be added dynamically here -->
+                  <tr>
                     <td>Employee-Name</td>
                     <td>Project-Name</td>
-                    <td>Tasks-Name</td>
-                    <td>Resource-Name</td>
+                    <td>
+                      <ol>
+                        <li>Tasks-Name</li>
+                        <li>Tasks-Name</li>
+                        <li>Tasks-Name</li>
+                      </ol>
+                    </td>
+                    <td>
+                      <ol>
+                        <li>Resource-Name</li>
+                        <li>Resource-Name</li>
+                        <li>Resource-Name</li>
+                        <li>Resource-Name</li>
+                      </ol>
+                    </td>
                     <td>Status</td>
+                  </tr>
+                   
                 </tbody>
               </table>
 
@@ -91,7 +109,7 @@
                     <th>Update-S</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="projectTable">
                   <!-- Rows will be added dynamically here -->
                   <tr>
                     <td>Project-Name</td>
@@ -125,7 +143,7 @@
                     <th>Delete</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="taskTable">
                   <!-- Rows will be added dynamically here -->
                   <tr>
                     <td>Task-Name</td>
@@ -134,7 +152,14 @@
                     <td>Description</td>
                     <td>Start-Date</td>
                     <td>End-Date</td>
-                    <td>Resource-Name</td>
+                    <td>
+                      <ol>
+                        <li>Resource-Name</li>
+                        <li>Resource-Name</li>
+                        <li>Resource-Name</li>
+                        <li>Resource-Name</li>
+                      </ol>
+                    </td>
                     <td>Status</td>
                     <td class="taskUpdate">Update</td>
                     <td class="taskDelete">Delete</td>
@@ -154,7 +179,7 @@
                     <th>Delete</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="resourceTable">
                   <!-- Rows will be added dynamically here -->
                   <tr>
                     <td>Resource-Name</td>

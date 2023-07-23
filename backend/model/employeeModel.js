@@ -5,7 +5,7 @@ const employeeSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },
-  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Projects' }],
+  tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tasks' }]
 });
 
 const Employees = mongoose.model("Employees", employeeSchema);

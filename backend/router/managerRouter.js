@@ -19,7 +19,8 @@ managerRouter.get("/", async (req, res)=>{
         let allManager = await Managers.find()
         res.send({message : "Hello, Manager!", allManager})        
     } catch (error) {
-        console.log("something went wrong in manager router in /")
+        // console.log("something went wrong in manager router in /")
+        console.log(error)
     }
 })
 
@@ -71,7 +72,56 @@ managerRouter.post("/login", async (req, res)=>{
 })
 
 
-managerRouter.use(managerAuth)
+// managerRouter.use(managerAuth)
+managerRouter.get("/employees", async (req, res)=>{
+    try {
+        let employeeData = await Employees.find({}, '-password').populate({
+            path: 'tasks',
+            populate: [
+              {
+                path: 'project',
+                model: 'Projects',
+              },
+              {
+                path: 'resources',
+                model: 'Resources',
+              }
+            ]
+          });
+        
+        res.send({message : "All Project", employeeData})
+    } catch (error) {
+        console.log("something went wrong in manager router in /")
+        console.log(error)
+    }
+})
+
+
+
+managerRouter.get("/projects", async (req, res)=>{
+    try {
+        let projectData = await Projects.find()
+            .populate('manager')
+            .populate('employees')
+            .populate('tasks');
+
+        res.send({message : "All Project", projectData})
+    } catch (error) {
+        console.log("something went wrong in manager router in /")
+    }
+})
+
+managerRouter.patch("/projects/:id", async (req, res)=>{
+    try {
+        let id = req.params.id
+        let status = req.body.status
+        let employeeData = await Projects.findByIdAndUpdate(id, {status})
+        res.send({message : `${employeeData.projectName} Updated`})
+    } catch (error) {
+        console.log("something went wrong in manager router in /")
+        console.log(error)
+    }
+})
 
 
 //Add Task For Projects
@@ -89,8 +139,45 @@ managerRouter.post("/tasks", async (req, res)=>{
 //GET TASK DATA 
 managerRouter.get("/tasks", async (req, res)=>{
     try {
-        let taskData = await Tasks.find()
-        res.send({message : "Get all task Data", taskData})
+        const allTaskData = await Tasks.find()
+        .populate('project', 'projectName description status startDate endDate')
+        .populate('employee', 'name email role')
+        .populate('resources', 'resourceName description type availability');
+    
+     res.send({message : "get all tasks data", allTaskData});
+    } catch (error) {
+        console.log("something went wrong in /employee")
+    }
+})
+
+managerRouter.patch("/tasks/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const projectId = req.body.project;
+    const employeeId = req.body.employee;
+    const taskData = await Tasks.findByIdAndUpdate(id, req.body, { new: true });
+    if (!taskData) {
+      console.log("Task not found.");
+      res.status(404).send({ error: "Task not found" });
+      return;
+    }
+    await Projects.findByIdAndUpdate(projectId, { $addToSet: { tasks: id } });
+    await Employees.findByIdAndUpdate(employeeId, { $addToSet: { tasks: id } });
+
+    res.send({ message: "Task updated", taskData });
+  } catch (error) {
+    console.log("Something went wrong in /tasks/:id");
+    console.error(error);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+});
+
+
+managerRouter.delete("/tasks/:id", async (req, res)=>{
+    try {
+        let id = req.params.id
+        let taskData = await Tasks.findByIdAndDelete({_id:id})
+        res.send({message : `${taskData.taskName} deleted`})
     } catch (error) {
         console.log("something went wrong in /employee")
     }
@@ -110,7 +197,7 @@ managerRouter.post("/resources", async (req, res)=>{
 //GET ALL RESOURCE 
 managerRouter.get("/resources", async (req, res)=>{
     try {
-        let resourceData = await Resources.find()
+        let resourceData = await Resources.find().populate('task');
         res.send({message : "Get all resource Data", resourceData})
     } catch (error) {
         console.log("something went wrong in /employee")
@@ -119,25 +206,49 @@ managerRouter.get("/resources", async (req, res)=>{
 
 
 //GET ALL PROJECT 
+
+managerRouter.patch("/resources/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const taskId = req.body.task;
+    const resourceData = await Resources.findByIdAndUpdate(id, req.body);
+    await Tasks.findByIdAndUpdate(taskId, { $addToSet: { resources: id } });
+    res.send({ message: "Resource Update" });
+  } catch (error) {
+    console.log("Something went wrong in manager router in /resources/:id");
+    console.error(error);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+});
+
+
+managerRouter.delete("/resources/:id", async (req, res)=>{
+    try {
+        let id = req.params.id
+        let resourceData = await Resources.findByIdAndDelete({_id :  id})
+        res.send({message : `${resourceData.resourceName} Deleted`})
+    } catch (error) {
+        console.log("something went wrong in manager router in /")
+    }
+})
+
+
+//GET ALL EMPLOYEE
 managerRouter.get("/projects", async (req, res)=>{
     try {
-        let id = req.body._id
-        let projectData = await Projects.find({_id :  id})
+        let projectData = await Projects.find()
+            .populate('manager')
+            .populate('employees')
+            .populate('tasks');
+
         res.send({message : "All Project", projectData})
     } catch (error) {
         console.log("something went wrong in manager router in /")
     }
 })
 
-//GET ALL EMPLOYEE
-managerRouter.get("/employees", async (req, res)=>{
-    try {
-        let employeeData = await Employees.find()
-        res.send({message : "All Project", employeeData})
-    } catch (error) {
-        console.log("something went wrong in manager router in /")
-    }
-})
+
+
 
 
 
